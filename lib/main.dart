@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pos/screens/company_data/company_data.dart';
-import 'package:pos/screens/reset_database/reset_database.dart';
-import 'package:pos/screens/tax_rates/new_tax_rate.dart';
-import 'package:pos/screens/tax_rates/tax_rates.dart';
-import 'package:pos/utilities/app_theme.dart';
+import 'package:pos/screens/management_drawer/management_drawer.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light() , // TODO : Need to change with AppTheme.lighTheme
       darkTheme: ThemeData.dark(), // TODO : Need to change with AppTheme.darkTheme
       themeMode: ThemeMode.dark,
-      home: TaxRates(),
+      home: ManagmentDrawer(),
     );
   }
 }

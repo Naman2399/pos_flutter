@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO : Try to implement the custom theme and use the values in main.dart file
+// TODO : Try to implement the custom theme and use the values in management_drawer.dart file
 class AppTheme {
   //
   AppTheme._();

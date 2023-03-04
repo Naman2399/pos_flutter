@@ -32,13 +32,21 @@ class _TaxRatesState extends State<TaxRates> {
 
   @override
   void initState() {
-    doSomeAsyncStuff();
     super.initState();
+    doSomeAsyncStuff();
   }
 
   Future<void> doSomeAsyncStuff() async {
     taxRates = (await taxRateFunctions.getAllTaxRates())!;
     originalTaxRates = taxRates;
+    taxRateSource = TaxRateSource(taxRates: taxRates, count: taxRates.length);
+    for (TaxRate taxRate in taxRates) {
+      suggestions.add(taxRate.taxName);
+      suggestions.add(taxRate.taxCode);
+    }
+    setState(() {
+
+    });
   }
 
   onSortColumn(int columnIndex, bool ascending) {
@@ -128,11 +136,6 @@ class _TaxRatesState extends State<TaxRates> {
 
   @override
   Widget build(BuildContext context) {
-    taxRateSource = TaxRateSource(taxRates: taxRates, count: taxRates.length);
-    for (TaxRate taxRate in taxRates) {
-      suggestions.add(taxRate.taxName);
-      suggestions.add(taxRate.taxCode);
-    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tax rates'),
@@ -318,6 +321,7 @@ class _TaxRatesState extends State<TaxRates> {
                 width: 10,
               ),
               Expanded(
+                flex: 1,
                 child: Autocomplete(
                   optionsBuilder: (TextEditingValue textEditingValue) {
                     setState(() {
@@ -341,6 +345,7 @@ class _TaxRatesState extends State<TaxRates> {
                       FocusNode fieldFocusNode,
                       VoidCallback onFieldSubmitted) {
                     return TextField(
+                      autofocus: true,
                       controller: fieldTextEditingController,
                       focusNode: fieldFocusNode,
                       style: const TextStyle(fontWeight: FontWeight.bold),
@@ -357,8 +362,8 @@ class _TaxRatesState extends State<TaxRates> {
                     developer.log("Search Field content : $searchText}");
                     List<TaxRate> newTaxRates = originalTaxRates
                         .where((element) => element.taxName
-                            .toLowerCase()
-                            .contains(searchText.toLowerCase()))
+                        .toLowerCase()
+                        .contains(searchText.toLowerCase()))
                         .toList();
                     developer.log(newTaxRates.length.toString());
                     setState(() {
@@ -376,94 +381,92 @@ class _TaxRatesState extends State<TaxRates> {
           // buildTable(taxRates: taxRates, context: context),
           taxRates.isNotEmpty
               ? PaginatedDataTable(
-                  showCheckboxColumn: true,
-                  sortAscending: isAscending,
-                  sortColumnIndex: sortColumnIndex,
-                  columns: <DataColumn>[
-                    DataColumn(
-                      label: const Text('Tax name'),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          sortColumnIndex = columnIndex;
-                          isAscending = ascending;
-                        });
-                        onSortColumn(sortColumnIndex, isAscending);
-                      },
-                    ),
-                    DataColumn(
-                      label: const Text('Tax code'),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          sortColumnIndex = columnIndex;
-                          isAscending = ascending;
-                        });
-                        onSortColumn(sortColumnIndex, isAscending);
-                      },
-                    ),
-                    DataColumn(
-                      label: const Text('Tax rate'),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          sortColumnIndex = columnIndex;
-                          isAscending = ascending;
-                        });
-                        onSortColumn(sortColumnIndex, isAscending);
-                      },
-                    ),
-                    DataColumn(
-                      label: const Text('Is Fixed'),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          sortColumnIndex = columnIndex;
-                          isAscending = ascending;
-                        });
-                        onSortColumn(sortColumnIndex, isAscending);
-                      },
-                    ),
-                  ],
-                  source: taxRateSource,
-                  rowsPerPage: 8,
-                  columnSpacing: 8,
-                )
-              : Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(5),
-                    padding: const EdgeInsets.all(5),
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.remove_red_eye_outlined,
-                          size: 50,
-                        ),
-                        Text(
-                          'No taxes',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        FloatingActionButton.extended(
-                          label: Text(
-                            'Add new taxes',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          backgroundColor: Theme.of(context).colorScheme.background,
-                          foregroundColor: Theme.of(context).hintColor,
-                          icon: const Icon(
-                            Icons.add,
-                            size: 24.0,
-                          ),
-                          onPressed: () {
-                            newTaxRateBottomSheet(context);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+            showCheckboxColumn: true,
+            sortAscending: isAscending,
+            sortColumnIndex: sortColumnIndex,
+            columns: <DataColumn>[
+              DataColumn(
+                label: const Text('Tax name'),
+                onSort: (columnIndex, ascending) {
+                  setState(() {
+                    sortColumnIndex = columnIndex;
+                    isAscending = ascending;
+                  });
+                  onSortColumn(sortColumnIndex, isAscending);
+                },
+              ),
+              DataColumn(
+                label: const Text('Tax code'),
+                onSort: (columnIndex, ascending) {
+                  setState(() {
+                    sortColumnIndex = columnIndex;
+                    isAscending = ascending;
+                  });
+                  onSortColumn(sortColumnIndex, isAscending);
+                },
+              ),
+              DataColumn(
+                label: const Text('Tax rate'),
+                onSort: (columnIndex, ascending) {
+                  setState(() {
+                    sortColumnIndex = columnIndex;
+                    isAscending = ascending;
+                  });
+                  onSortColumn(sortColumnIndex, isAscending);
+                },
+              ),
+              DataColumn(
+                label: const Text('Is Fixed'),
+                onSort: (columnIndex, ascending) {
+                  setState(() {
+                    sortColumnIndex = columnIndex;
+                    isAscending = ascending;
+                  });
+                  onSortColumn(sortColumnIndex, isAscending);
+                },
+              ),
+            ],
+            source: taxRateSource,
+            rowsPerPage: 8,
+            columnSpacing: 8,
+          )
+              : Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.remove_red_eye_outlined,
+                  size: 50,
                 ),
+                Text(
+                  'No taxes',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FloatingActionButton.extended(
+                  label: Text(
+                    'Add new taxes',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  foregroundColor: Theme.of(context).hintColor,
+                  icon: const Icon(
+                    Icons.add,
+                    size: 24.0,
+                  ),
+                  onPressed: () {
+                    newTaxRateBottomSheet(context);
+                  },
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -522,6 +525,8 @@ class TaxRateSource extends DataTableSource {
   @override
   int get selectedRowCount => rowsSelected;
 }
+
+
 
 // Extra widget is there for DataTableRow logics
 // Widget trialAndTested(BuildContext context) {
