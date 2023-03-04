@@ -21,38 +21,51 @@ class ManagmentDrawer extends StatefulWidget {
 
 class _ManagmentDrawerState extends State<ManagmentDrawer> {
   var currentPage = DrawerSections.dashboard;
+  String title = "Management" ;
 
   @override
   Widget build(BuildContext context) {
     var container;
     if (currentPage == DrawerSections.dashboard) {
       container = DashboardPage();
+      title = "Management" ;
     } else if (currentPage == DrawerSections.documents) {
       container = DocumentsPage();
+      title = "Management / Documents" ;
     } else if (currentPage == DrawerSections.products) {
       container = ProductsPage();
+      title = "Management / Products" ;
     } else if (currentPage == DrawerSections.stock) {
       container = StockPage();
+      title = "Management / Stock" ;
     } else if (currentPage == DrawerSections.reporting) {
       container = ReportPage();
+      title = "Management / Reports" ;
     } else if (currentPage == DrawerSections.customersAndSuppliers) {
       container = CustomerAndSupplierPage();
+      title = "Management / Customers & Suppliers";
     } else if (currentPage == DrawerSections.promotionAndAction) {
       container = PromotionAndActionPage();
+      title = "Management / Promotions & Actions" ;
     } else if (currentPage == DrawerSections.userAndSecurity) {
       container = UserAndSecurityPage();
+      title = "Management / User & Security" ;
     } else if (currentPage == DrawerSections.printStation) {
       container = PrintStationPage();
+      title = "Management / Print station" ;
     } else if (currentPage == DrawerSections.paymentTypes) {
       container = PaymentTypePage();
+      title = "Management / Payment types" ;
     } else if (currentPage == DrawerSections.taxRates) {
       container = TaxRates();
+      title = "Management / Tax rates" ;
     } else if (currentPage == DrawerSections.myCompany) {
       container = Company();
+      title = "Management / My Company" ;
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text("Management"),
+        title: Text(title, style: Theme.of(context).textTheme.titleLarge,),
       ),
       body: container,
       drawer: Drawer(

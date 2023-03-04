@@ -29,9 +29,6 @@ class _Company extends State<Company> {
   Widget build(BuildContext context) {
     CompanyData companyData;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Company Data'),
-      ),
       body: FutureBuilder(
         future: companyDataServices.loadCompanyDetails(),
         builder: (context, snapshot) {

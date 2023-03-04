@@ -137,9 +137,6 @@ class _TaxRatesState extends State<TaxRates> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tax rates'),
-      ),
       body: ListView(
         children: [
           Row(
