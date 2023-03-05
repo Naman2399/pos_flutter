@@ -60,7 +60,7 @@ class TaxRateFunctions {
       developer.log("All the tax rates are loaded successfully from database ");
       return taxRates;
     } on Exception catch (error) {
-      developer.log("Error in saving new tax rate");
+      developer.log("Error in fetching tax rates");
       developer.log(error.toString());
       return null;
     }

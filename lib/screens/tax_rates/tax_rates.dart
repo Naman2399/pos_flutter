@@ -87,6 +87,10 @@ class _TaxRatesState extends State<TaxRates> {
             (a, b) => b.isFixedRate.toString().compareTo(a.taxName.toString()));
       }
     }
+
+    setState(() {
+      taxRateSource = TaxRateSource(taxRates: taxRates, count: taxRates.length);
+    });
   }
 
   onEditTaxRate() {
@@ -385,40 +389,32 @@ class _TaxRatesState extends State<TaxRates> {
               DataColumn(
                 label: const Text('Tax name'),
                 onSort: (columnIndex, ascending) {
-                  setState(() {
-                    sortColumnIndex = columnIndex;
-                    isAscending = ascending;
-                  });
+                  sortColumnIndex = columnIndex;
+                  isAscending = ascending;
                   onSortColumn(sortColumnIndex, isAscending);
                 },
               ),
               DataColumn(
                 label: const Text('Tax code'),
                 onSort: (columnIndex, ascending) {
-                  setState(() {
-                    sortColumnIndex = columnIndex;
-                    isAscending = ascending;
-                  });
+                  sortColumnIndex = columnIndex;
+                  isAscending = ascending;
                   onSortColumn(sortColumnIndex, isAscending);
                 },
               ),
               DataColumn(
                 label: const Text('Tax rate'),
                 onSort: (columnIndex, ascending) {
-                  setState(() {
-                    sortColumnIndex = columnIndex;
-                    isAscending = ascending;
-                  });
+                  sortColumnIndex = columnIndex;
+                  isAscending = ascending;
                   onSortColumn(sortColumnIndex, isAscending);
                 },
               ),
               DataColumn(
                 label: const Text('Is Fixed'),
                 onSort: (columnIndex, ascending) {
-                  setState(() {
-                    sortColumnIndex = columnIndex;
-                    isAscending = ascending;
-                  });
+                  sortColumnIndex = columnIndex;
+                  isAscending = ascending;
                   onSortColumn(sortColumnIndex, isAscending);
                 },
               ),

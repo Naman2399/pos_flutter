@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pos/screens/management_drawer/management_drawer.dart';
+import 'package:pos/screens/payment_type/new_payment_type.dart';
 
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light() , // TODO : Need to change with AppTheme.lighTheme
       darkTheme: ThemeData.dark(), // TODO : Need to change with AppTheme.darkTheme
       themeMode: ThemeMode.dark,
-      home: ManagmentDrawer(),
+      home: ManagmentDrawer(), // TODO : At final replace with Managment Drawer
     );
   }
 }
