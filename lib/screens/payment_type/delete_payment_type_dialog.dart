@@ -47,67 +47,69 @@ class _DeletePaymentTypeDialogBoxState
         width: MediaQuery.of(context).size.width * 0.5,
         height: MediaQuery.of(context).size.height * 0.5,
         color: Theme.of(context).colorScheme.background,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Delete Payment Types',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Text(
-              'Please confirm to delete following payment types !!',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              delete,
-              style: Theme.of(context).textTheme.titleSmall,
-              maxLines: 3,
-            ),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  width: 10,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    deletePaymentTypes();
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.amber,
-                    foregroundColor: Colors.black,
-                    textStyle: Theme.of(context).textTheme.titleMedium,
+        child: Card(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Delete Payment Types',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Text(
+                'Please confirm to delete following payment types !!',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                delete,
+                style: Theme.of(context).textTheme.titleSmall,
+                maxLines: 3,
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 10,
                   ),
-                  child: const Text('Delete'),
-                ),
-                const Spacer(),
-                TextButton(
+                  ElevatedButton(
                     onPressed: () {
+                      deletePaymentTypes();
                       Navigator.pop(context);
                     },
-                    child: Text(
-                      'Cancel',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    )),
-                const SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-          ],
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amber,
+                      foregroundColor: Colors.black,
+                      textStyle: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    child: const Text('Delete'),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'Cancel',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+            ],
+          ),
         ),
       ),
     );

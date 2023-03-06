@@ -20,7 +20,7 @@ class EditPaymentType extends StatefulWidget {
 }
 
 class _EditPaymentTypeState extends State<EditPaymentType> {
-  PaymentTypeServices paymentTypeServices = PaymentTypeServices();
+  late PaymentTypeServices paymentTypeServices;
   TextEditingController name = TextEditingController();
   TextEditingController code = TextEditingController();
   TextEditingController shortcutKey = TextEditingController();
@@ -125,8 +125,8 @@ class _EditPaymentTypeState extends State<EditPaymentType> {
         changeAllowed: isChangeAllowed,
         markTransaction: isPaid,
         openCashDrawer: isOpenCashDrawer);
+    paymentTypeServices = PaymentTypeServices(context: context);
     paymentTypeServices.editDetails(
-        context: context,
         oldPaymentType: widget.paymentType,
         newPaymentType: newPaymentType);
   }
@@ -168,7 +168,7 @@ class _EditPaymentTypeState extends State<EditPaymentType> {
                     'Name ',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  Text(
+                  const Text(
                     '*',
                     style: TextStyle(fontFeatures: [FontFeature.superscripts()]),
                   ),
@@ -187,7 +187,7 @@ class _EditPaymentTypeState extends State<EditPaymentType> {
                     'Code ',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  Text(
+                  const Text(
                     '*',
                     style: TextStyle(fontFeatures: [FontFeature.superscripts()]),
                   ),
@@ -217,7 +217,7 @@ class _EditPaymentTypeState extends State<EditPaymentType> {
                     'Position ',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  Text(
+                  const Text(
                     '*',
                     style: TextStyle(fontFeatures: [FontFeature.superscripts()]),
                   ),

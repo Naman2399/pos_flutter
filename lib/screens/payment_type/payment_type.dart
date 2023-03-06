@@ -158,7 +158,7 @@ class _PaymentTypePageState extends State<PaymentTypePage> {
                         width: 1, color: Theme.of(context).highlightColor)),
                 margin: const EdgeInsets.all(5),
                 child: SizedBox.fromSize(
-                  size: const Size(80, 80),
+                  size: const Size(100, 80),
                   child: ClipRect(
                     child: Material(
                       color: Theme.of(context).dialogBackgroundColor,
@@ -169,11 +169,13 @@ class _PaymentTypePageState extends State<PaymentTypePage> {
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: const [
                             Icon(Icons.add), // <-- Icon
                             Text(
-                              "New tax rate",
-                            ), // <-- Text
+                              "New payment",
+                            ),
+                            Text("type"),// <-- Text
                           ],
                         ),
                       ),
@@ -350,32 +352,32 @@ class _PaymentTypePageState extends State<PaymentTypePage> {
                         onSortColumn(sortColumnIndex, isAscending);
                       },
                     ),
-                    DataColumn(
-                      label: const Text('Shortcut Key'),
+                    const DataColumn(
+                      label: Text('Shortcut Key'),
                     ),
-                    DataColumn(
-                      label: const Text('Position'),
+                    const DataColumn(
+                      label: Text('Position'),
                     ),
-                    DataColumn(
-                      label: const Text('Enabled'),
+                    const DataColumn(
+                      label: Text('Enabled'),
                     ),
-                    DataColumn(
-                      label: const Text('Quick Payment'),
+                    const DataColumn(
+                      label: Text('Quick Payment'),
                     ),
-                    DataColumn(
-                      label: const Text('Customer Required'),
+                    const DataColumn(
+                      label: Text('Customer Required'),
                     ),
-                    DataColumn(
-                      label: const Text('Print Receipt'),
+                    const DataColumn(
+                      label: Text('Print Receipt'),
                     ),
-                    DataColumn(
-                      label: const Text('Change Allowed'),
+                    const DataColumn(
+                      label: Text('Change Allowed'),
                     ),
-                    DataColumn(
-                      label: const Text('Mark transaction'),
+                    const DataColumn(
+                      label: Text('Mark transaction'),
                     ),
-                    DataColumn(
-                      label: const Text('Open Cash Drawer'),
+                    const DataColumn(
+                      label: Text('Open Cash Drawer'),
                     ),
                   ],
                   source: paymentTypeSource,
