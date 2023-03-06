@@ -14,64 +14,77 @@ class CompanyDataServices {
   CompanyDataServices() ;
 
   Future<CompanyData> loadCompanyDetails() async{
-    developer.log('Loading all the details from the database');
-    Mysql database = Mysql() ;
-    MySqlConnection connection = await database.getConnection()   ;
-    var results =  await connection.query('SELECT name, tax_number, address, '
-        'zip_code, city, state, country, phone_number, '
-        'email, bank_account_number, bank_details '
-        'FROM company_details');
+    try{
+      developer.log('Loading all the details from the database');
+      Mysql database = Mysql() ;
+      MySqlConnection connection = await database.getConnection()   ;
+      var results =  await connection.query('SELECT name, tax_number, address, '
+          'zip_code, city, state, country, phone_number, '
+          'email, bank_account_number, bank_details '
+          'FROM company_details');
 
-    CompanyData companyData = CompanyData() ;
-    for (var row in results) {
-      companyData = CompanyData(name: row[0], taxNumber: row[1], address: row[2],
-      zipCode: row[3], city: row[4], state: row[5], country: row[6], phoneNumber: row[7],
-      email: row[8], bankAccountNumber: row[9], bankDetails: row[10]);
+      CompanyData companyData = CompanyData() ;
+      for (var row in results) {
+        companyData = CompanyData(name: row[0], taxNumber: row[1], address: row[2],
+            zipCode: row[3], city: row[4], state: row[5], country: row[6], phoneNumber: row[7],
+            email: row[8], bankAccountNumber: row[9], bankDetails: row[10]);
+      }
+      return companyData ;
+
+    }on Exception catch(error, stackTrace){
+      developer.log("Error in saving updating company details");
+      developer.log(error.toString());
+      developer.log(stackTrace.toString());
+      rethrow;
     }
-    return companyData ;
   }
 
   Future<void> saveDetails({required BuildContext context, required CompanyData companyData}) async {
-    developer.log("Saving all the company details");
-    developer.log("Updating the company details");
-    developer.log("Company Details ... ") ;
-    developer.log("Name : ${companyData.name}");
-    developer.log("Tax : ${companyData.taxNumber}");
-    developer.log("Address : ${companyData.address}");
-    developer.log("Zip Code : ${companyData.zipCode}");
-    developer.log("City : ${companyData.city}");
-    developer.log("State : ${companyData.state}");
-    developer.log("Country : ${companyData.country}");
-    developer.log("Phone Number : ${companyData.phoneNumber}");
-    developer.log("Email : ${companyData.email}");
-    developer.log("Bank Account Number : ${companyData.bankAccountNumber}");
-    developer.log("Bank Details : ${companyData.bankDetails}");
+    try{
+      developer.log("Saving all the company details");
+      developer.log("Updating the company details");
+      developer.log("Company Details ... ") ;
+      developer.log("Name : ${companyData.name}");
+      developer.log("Tax : ${companyData.taxNumber}");
+      developer.log("Address : ${companyData.address}");
+      developer.log("Zip Code : ${companyData.zipCode}");
+      developer.log("City : ${companyData.city}");
+      developer.log("State : ${companyData.state}");
+      developer.log("Country : ${companyData.country}");
+      developer.log("Phone Number : ${companyData.phoneNumber}");
+      developer.log("Email : ${companyData.email}");
+      developer.log("Bank Account Number : ${companyData.bankAccountNumber}");
+      developer.log("Bank Details : ${companyData.bankDetails}");
 
-    if (validateName(context, companyData.name) &&
-        validateAddress(context, companyData.address) &&
-        validateZipCode(context, companyData.zipCode) &&
-        validateCity(context, companyData.city) &&
-        validateState(context, companyData.state) &&
-        validateCountry(context, companyData.country) &&
-        validatePhoneNumber(context, companyData.phoneNumber) &&
-        validateEmail(context, companyData.email)) {
+      if (validateName(context, companyData.name) &&
+          validateAddress(context, companyData.address) &&
+          validateZipCode(context, companyData.zipCode) &&
+          validateCity(context, companyData.city) &&
+          validateState(context, companyData.state) &&
+          validateCountry(context, companyData.country) &&
+          validatePhoneNumber(context, companyData.phoneNumber) &&
+          validateEmail(context, companyData.email)) {
 
-      Mysql database = Mysql() ;
-      MySqlConnection connection = await database.getConnection()   ;
+        Mysql database = Mysql() ;
+        MySqlConnection connection = await database.getConnection()   ;
 
-      connection.query('UPDATE company_details SET name = ? , tax_number = ?, '
-          'address = ? , zip_code = ?, city = ?, state = ?, '
-          'country = ?, phone_number = ?, email = ?, '
-          'bank_account_number = ?, bank_details = ? ',
-          [companyData.name, companyData.taxNumber, companyData.address, companyData.zipCode,
-            companyData.city , companyData.state, companyData.country,
-            companyData.phoneNumber, companyData.email, companyData.bankAccountNumber,
-            companyData.bankDetails]) ;
-      connection.query('commit') ;
-      developer.log('All The Details Saved Successfully') ;
+        await connection.query('UPDATE company_details SET name = ? , tax_number = ?, '
+            'address = ? , zip_code = ?, city = ?, state = ?, '
+            'country = ?, phone_number = ?, email = ?, '
+            'bank_account_number = ?, bank_details = ? ',
+            [companyData.name, companyData.taxNumber, companyData.address, companyData.zipCode,
+              companyData.city , companyData.state, companyData.country,
+              companyData.phoneNumber, companyData.email, companyData.bankAccountNumber,
+              companyData.bankDetails]) ;
+        connection.query('commit') ;
+        developer.log('All The Details Saved Successfully') ;
 
+      }
+    }on Exception catch(error, stackTrace){
+      developer.log("Error in saving updating company details");
+      developer.log(error.toString());
+      developer.log(stackTrace.toString());
     }
-
   }
 
   bool validateName(BuildContext context, String string) {
@@ -180,10 +193,6 @@ class CompanyDataServices {
           contentType: ContentType.failure);
       return false ;
     }
-
     return true;
-
   }
-
-
 }

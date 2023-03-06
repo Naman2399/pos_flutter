@@ -24,14 +24,15 @@ class TaxRateFunctions {
 
       developer.log("New Tax  Rate is saved successfully ");
       return true;
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
       developer.log("Error in saving new tax rate");
       developer.log(error.toString());
-      return false;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
-  Future<List<TaxRate>?> getAllTaxRates() async {
+  Future<List<TaxRate>> getAllTaxRates() async {
     try {
       Mysql database = Mysql();
       MySqlConnection connection = await database.getConnection();
@@ -59,10 +60,11 @@ class TaxRateFunctions {
 
       developer.log("All the tax rates are loaded successfully from database ");
       return taxRates;
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
       developer.log("Error in fetching tax rates");
       developer.log(error.toString());
-      return null;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
@@ -86,10 +88,11 @@ class TaxRateFunctions {
       ]);
       developer.log("Tax Rate Edited successfully ");
       return true;
-    } on Exception catch (error) {
-      developer.log("Error in saving new tax rate");
+    } on Exception catch (error, stackTrace) {
+      developer.log("Error in editing tax rate");
       developer.log(error.toString());
-      return false;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
@@ -101,10 +104,11 @@ class TaxRateFunctions {
                           WHERE tax_name = ? ''', [taxRate.taxName]);
       developer.log("Tax Rate Deleted successfully : ${taxRate.taxName} ");
       return true;
-    } on Exception catch (error) {
-      developer.log("Error in saving new tax rate");
+    } on Exception catch (error, stackTrace) {
+      developer.log("Error in deleting tax rate");
       developer.log(error.toString());
-      return false;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
@@ -124,10 +128,11 @@ class TaxRateFunctions {
         return true;
       }
       return false;
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
       developer.log("Error in reaching database for tax_rate table");
       developer.log(error.toString());
-      return true;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
@@ -147,10 +152,11 @@ class TaxRateFunctions {
         return true;
       }
       return false;
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
       developer.log("Error in reaching database for tax_rate table");
       developer.log(error.toString());
-      return true;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 }

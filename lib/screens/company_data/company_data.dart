@@ -1,8 +1,9 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:pos/screens/company_data/company_data_services.dart';
+import 'package:pos/widgets/snackbar.dart';
 import '../../models/company_data.dart';
 import 'local_widgets.dart';
-
 
 class Company extends StatefulWidget {
   const Company({super.key});
@@ -24,6 +25,28 @@ class _Company extends State<Company> {
   TextEditingController email = TextEditingController();
   TextEditingController bankAccountNumber = TextEditingController();
   TextEditingController bankDetails = TextEditingController();
+
+  save() {
+    CompanyData companyData = CompanyData(
+        name: name.text,
+        taxNumber: tax.text,
+        address: address.text,
+        zipCode: zipCode.text,
+        city: city.text,
+        state: state.text,
+        country: country.text,
+        phoneNumber: phone.text,
+        email: email.text,
+        bankAccountNumber: bankAccountNumber.text,
+        bankDetails: bankDetails.text);
+    companyDataServices.saveDetails(context: context,companyData: companyData);
+
+    displayMessage(
+        context: context,
+        title: "Save successfully",
+        message: "All company details saved successfully",
+        contentType: ContentType.success);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,35 +80,50 @@ class _Company extends State<Company> {
                 children: [
                   heading(name: 'My Company Data', context: context),
                   inputField(
-                      inputFieldName: 'Name', textEditingController: name , context: context),
+                      inputFieldName: 'Name',
+                      textEditingController: name,
+                      context: context),
                   inputField(
                       inputFieldName: 'TAX / GST No.',
-                      textEditingController: tax , context: context),
+                      textEditingController: tax,
+                      context: context),
                   inputField(
                       inputFieldName: 'Address',
-                      textEditingController: address, context: context),
+                      textEditingController: address,
+                      context: context),
                   inputField(
                       inputFieldName: 'Zip Code',
-                      textEditingController: zipCode, context: context),
+                      textEditingController: zipCode,
+                      context: context),
                   inputField(
-                      inputFieldName: 'City', textEditingController: city, context: context),
+                      inputFieldName: 'City',
+                      textEditingController: city,
+                      context: context),
                   inputField(
-                      inputFieldName: 'State', textEditingController: state, context: context),
+                      inputFieldName: 'State',
+                      textEditingController: state,
+                      context: context),
                   inputField(
                       inputFieldName: 'Country',
-                      textEditingController: country, context: context),
+                      textEditingController: country,
+                      context: context),
                   inputField(
                       inputFieldName: 'Phone Number',
-                      textEditingController: phone, context: context),
+                      textEditingController: phone,
+                      context: context),
                   inputField(
-                      inputFieldName: 'Email', textEditingController: email, context: context),
+                      inputFieldName: 'Email',
+                      textEditingController: email,
+                      context: context),
                   heading(name: 'Bank Details', context: context),
                   inputField(
                       inputFieldName: 'Bank Acount Number',
-                      textEditingController: bankAccountNumber, context: context),
+                      textEditingController: bankAccountNumber,
+                      context: context),
                   inputField(
                       inputFieldName: 'Bank Details',
-                      textEditingController: bankDetails, context: context),
+                      textEditingController: bankDetails,
+                      context: context),
                   Container(
                     alignment: Alignment.center,
                     width: 40,
@@ -95,20 +133,7 @@ class _Company extends State<Company> {
                         foregroundColor: Colors.white, // foreground
                       ),
                       onPressed: () {
-                        CompanyData companyData = CompanyData(
-                            name: name.text,
-                            taxNumber: tax.text,
-                            address: address.text,
-                            zipCode: zipCode.text,
-                            city: city.text,
-                            state: state.text,
-                            country: country.text,
-                            phoneNumber: phone.text,
-                            email: email.text,
-                            bankAccountNumber: bankAccountNumber.text,
-                            bankDetails: bankDetails.text);
-                        companyDataServices.saveDetails(
-                            context: context, companyData: companyData);
+                        save();
                       },
                       child: const Text('Save'),
                     ),

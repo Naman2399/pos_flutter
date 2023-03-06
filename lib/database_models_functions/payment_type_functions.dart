@@ -33,15 +33,17 @@ class PaymentTYpeFunctions {
 
       developer.log("New Payment Type is saved successfully ");
       return true;
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
       developer.log("Error in saving new payment type");
       developer.log(error.toString());
-      return false;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
-  Future<bool> editPaymentType({required PaymentType oldPaymentType, required PaymentType newPaymentType}) async{
-
+  Future<bool> editPaymentType(
+      {required PaymentType oldPaymentType,
+      required PaymentType newPaymentType}) async {
     try {
       Mysql database = Mysql();
       MySqlConnection connection = await database.getConnection();
@@ -74,12 +76,12 @@ class PaymentTYpeFunctions {
       ]);
       developer.log("Payment Type Edited successfully ");
       return true;
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
       developer.log("Error in editing payment type");
       developer.log(error.toString());
-      return false;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
-
   }
 
   Future<bool> deletePaymentType({required PaymentType paymentType}) async {
@@ -91,10 +93,11 @@ class PaymentTYpeFunctions {
           [paymentType.name]);
       developer.log("Payment TYpe Deleted successfully : ${paymentType.name} ");
       return true;
-    } on Exception catch (error) {
-      developer.log("Error in saving new tax rate");
+    } on Exception catch (error, stackTrace) {
+      developer.log("Error in deleting payment type");
       developer.log(error.toString());
-      return false;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
@@ -142,16 +145,18 @@ class PaymentTYpeFunctions {
             markTransaction: row[9] == 0 ? false : true,
             openCashDrawer: row[10] == 0 ? false : true));
       }
-      developer.log("All the payment types are loaded successfully from database ");
+      developer
+          .log("All the payment types are loaded successfully from database ");
       return paymentTypes;
-    } on Exception catch (error) {
-      developer.log("Error in fetching tax rates");
+    } on Exception catch (error, stackTrace) {
+      developer.log("Error in fetching payment types");
       developer.log(error.toString());
-      return [];
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
-  Future<bool> isPaymentNameExisted({required String name}) async{
+  Future<bool> isPaymentNameExisted({required String name}) async {
     try {
       Mysql database = Mysql();
       MySqlConnection connection = await database.getConnection();
@@ -167,14 +172,15 @@ class PaymentTYpeFunctions {
         return true;
       }
       return false;
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
       developer.log("Error in reaching database for payment_type table");
       developer.log(error.toString());
-      return true;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
-  Future<bool> isPaymentCodeExisted({required String code}) async{
+  Future<bool> isPaymentCodeExisted({required String code}) async {
     try {
       Mysql database = Mysql();
       MySqlConnection connection = await database.getConnection();
@@ -190,14 +196,16 @@ class PaymentTYpeFunctions {
         return true;
       }
       return false;
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
       developer.log("Error in reaching database for payment_type table");
       developer.log(error.toString());
-      return true;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
 
-  Future<bool> isPaymentShortcutKeyExisted({required String shortcutKey}) async{
+  Future<bool> isPaymentShortcutKeyExisted(
+      {required String shortcutKey}) async {
     try {
       Mysql database = Mysql();
       MySqlConnection connection = await database.getConnection();
@@ -213,11 +221,11 @@ class PaymentTYpeFunctions {
         return true;
       }
       return false;
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
       developer.log("Error in reaching database for payment_type table");
       developer.log(error.toString());
-      return true;
+      developer.log(stackTrace.toString());
+      rethrow;
     }
   }
-
 }
