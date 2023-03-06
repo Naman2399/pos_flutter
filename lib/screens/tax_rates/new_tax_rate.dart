@@ -1,6 +1,7 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:pos/widgets/text_decorations.dart';
+import '../../models/tax_rate.dart';
 import '../../widgets/snackbar.dart';
 import 'tax_rate_services.dart';
 import 'dart:developer' as developer;
@@ -20,7 +21,7 @@ class _NewTaxRateState extends State<NewTaxRate> {
   TextEditingController name = TextEditingController();
   TextEditingController code = TextEditingController();
   TextEditingController rate = TextEditingController();
-  TaxRateServices newTaxRateServices = TaxRateServices();
+  late TaxRateServices newTaxRateServices;
 
   decrement() {
     try{
@@ -60,6 +61,24 @@ class _NewTaxRateState extends State<NewTaxRate> {
           contentType: ContentType.failure);
     }
 
+  }
+
+  save() {
+
+    TaxRate taxRate = TaxRate(
+        taxName: name.text,
+        taxCode: code.text,
+        taxRate: double.parse(rate.text),
+        isFixedRate: isFixed);
+    newTaxRateServices = TaxRateServices(context: context);
+
+    developer.log("Saving New Tax Details");
+    developer.log("Tax Name : ${taxRate.taxName}");
+    developer.log("Code : ${taxRate.taxCode}");
+    developer.log("Rate : ${taxRate.taxRate}");
+    developer.log("Is Tax Rate Fixed : $isFixed");
+
+    newTaxRateServices.saveDetails(taxRate: taxRate);
   }
 
   @override
@@ -189,8 +208,7 @@ class _NewTaxRateState extends State<NewTaxRate> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          newTaxRateServices.saveDetails(context: context, taxName: name.text,
-                              taxCode: code.text, rate: rate.text, isFixed: isFixed);
+                          save() ;
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,

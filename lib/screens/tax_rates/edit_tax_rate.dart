@@ -9,16 +9,15 @@ import 'dart:developer' as developer;
 
 class EditTaxRate extends StatefulWidget {
   final TaxRate taxRate ;
-  EditTaxRate({Key? key, required TaxRate this.taxRate}) : super (key: key) ;
+  const EditTaxRate({Key? key, required this.taxRate}) : super (key: key) ;
 
   @override
-  State<EditTaxRate> createState() => _EditTaxRateState(taxRate);
+  State<EditTaxRate> createState() => _EditTaxRateState();
 }
 
 class _EditTaxRateState extends State<EditTaxRate> {
 
-  TaxRate taxRate ;
-  _EditTaxRateState(this.taxRate);
+  _EditTaxRateState();
 
   bool isFixed = false;
   String rateSign = '%';
@@ -27,15 +26,15 @@ class _EditTaxRateState extends State<EditTaxRate> {
   TextEditingController name = TextEditingController();
   TextEditingController code = TextEditingController();
   TextEditingController rate = TextEditingController();
-  TaxRateServices taxRateServices = TaxRateServices();
+  late TaxRateServices taxRateServices;
 
   @override
   void initState() {
     super.initState();
-    name.text = taxRate.taxName ;
-    code.text = taxRate.taxCode ;
-    rate.text = taxRate.taxRate.toString() ;
-    if(taxRate.isFixedRate){
+    name.text = widget.taxRate.taxName ;
+    code.text = widget.taxRate.taxCode ;
+    rate.text = widget.taxRate.taxRate.toString() ;
+    if(widget.taxRate.isFixedRate){
       isFixed = true ;
     }else{
       isFixed = false ;
@@ -82,13 +81,38 @@ class _EditTaxRateState extends State<EditTaxRate> {
 
   }
 
+  edit() {
+    TaxRate newTaxRate = TaxRate(
+        taxName: name.text,
+        taxCode: code.text,
+        taxRate: double.parse(rate.text),
+        isFixedRate: isFixed);
+
+    taxRateServices = TaxRateServices(context: context);
+
+    developer.log("Editing the Tax Rate");
+    developer.log("Old Tax Rate");
+    developer.log("Tax Name : ${widget.taxRate.taxName}");
+    developer.log("Code : ${widget.taxRate.taxCode}");
+    developer.log("Rate : ${widget.taxRate.taxRate}");
+    developer.log("Is Tax Rate Fixed : ${widget.taxRate.isFixedRate.toString()}");
+    developer.log("New Tax Rate");
+    developer.log("Tax Name : ${newTaxRate.taxName}");
+    developer.log("Code : ${newTaxRate.taxCode}");
+    developer.log("Rate : ${newTaxRate.taxRate}");
+    developer.log("Is Tax Rate Fixed : ${newTaxRate.isFixedRate.toString()}");
+
+    taxRateServices.editDetails(oldTaxRate: widget.taxRate,
+        newTaxRate : newTaxRate);
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.8,
       child: Scaffold(
-        appBar: AppBar(title: Text('Editing Tax Rate : ${taxRate.taxName}', style: Theme.of(context).textTheme.titleMedium,), ),
+        appBar: AppBar(title: Text('Editing Tax Rate : ${widget.taxRate.taxName}', style: Theme.of(context).textTheme.titleMedium,), ),
         body: ListView(
           children: [
             Container(
@@ -210,16 +234,14 @@ class _EditTaxRateState extends State<EditTaxRate> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          taxRateServices.editDetails(context: context, oldTaxRate: taxRate,
-                              taxName: name.text, taxCode: code.text, rate: rate.text, isFixed: isFixed);
-
+                          edit() ;
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           foregroundColor: Colors.white,
                         ),
                         child: Text(
-                          'Save',
+                          'Edit',
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                       ),

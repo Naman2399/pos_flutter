@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
 class SwitchTaxRate extends StatefulWidget {
+
   List<String> taxNames ;
   SwitchTaxRate({Key? key, required this.taxNames}) : super(key: key);
 
   @override
-  State<SwitchTaxRate> createState() => _SwitchTaxRateState(this.taxNames);
+  State<SwitchTaxRate> createState() => _SwitchTaxRateState();
 }
 
 class _SwitchTaxRateState extends State<SwitchTaxRate> {
   String oldTaxRate = "" ;
   String newTaxRate = "" ;
-  List<String> taxNames ;
 
-  _SwitchTaxRateState(this.taxNames);
+  _SwitchTaxRateState();
 
   @override
   void initState() {
     super.initState();
-    taxNames.add("");
+    widget.taxNames.add("");
   }
 
   // TODO : Need to implement the button functionality "Replace Button"
@@ -78,7 +78,7 @@ class _SwitchTaxRateState extends State<SwitchTaxRate> {
                       const SizedBox(height: 10,),
                       DropdownButton<String>(
                         value: oldTaxRate,
-                        items: taxNames
+                        items: widget.taxNames
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -111,7 +111,7 @@ class _SwitchTaxRateState extends State<SwitchTaxRate> {
                       const SizedBox(height: 10,),
                       DropdownButton<String>(
                         value: newTaxRate,
-                        items: taxNames
+                        items: widget.taxNames
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,

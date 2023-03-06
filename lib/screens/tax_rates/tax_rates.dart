@@ -33,11 +33,11 @@ class _TaxRatesState extends State<TaxRates> {
   @override
   void initState() {
     super.initState();
-    doSomeAsyncStuff();
+    loadData();
   }
 
-  Future<void> doSomeAsyncStuff() async {
-    taxRates = (await taxRateFunctions.getAllTaxRates())!;
+  Future<void> loadData() async {
+    taxRates = (await taxRateFunctions.getAllTaxRates());
     originalTaxRates = taxRates;
     taxRateSource = TaxRateSource(taxRates: taxRates, count: taxRates.length);
     for (TaxRate taxRate in taxRates) {
@@ -93,7 +93,11 @@ class _TaxRatesState extends State<TaxRates> {
     });
   }
 
-  onEditTaxRate() {
+  newTaxRate() {
+    newTaxRateBottomSheet(context);
+  }
+
+  editTaxRate() {
     if (taxRateSource.selectedTaxRates.isEmpty) {
       displayMessage(
           context: context,
@@ -116,7 +120,7 @@ class _TaxRatesState extends State<TaxRates> {
   }
 
   refresh() {
-    doSomeAsyncStuff() ;
+    loadData() ;
   }
 
   delete() {
@@ -188,7 +192,7 @@ class _TaxRatesState extends State<TaxRates> {
                       child: InkWell(
                         splashColor: Theme.of(context).highlightColor,
                         onTap: () {
-                          newTaxRateBottomSheet(context);
+                          newTaxRate();
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -217,11 +221,7 @@ class _TaxRatesState extends State<TaxRates> {
                       child: InkWell(
                         splashColor: Theme.of(context).highlightColor,
                         onTap: () {
-                          onEditTaxRate();
-                          refresh() ;
-                          setState(() {
-
-                          });
+                          editTaxRate();
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
