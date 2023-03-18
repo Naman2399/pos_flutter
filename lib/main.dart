@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pos/screens/management_drawer/management_drawer.dart';
 import 'package:pos/screens/payment_type/new_payment_type.dart';
+import 'package:pos/screens/user_and_security/add_user.dart';
 
 
 void main() {
