@@ -1,7 +1,7 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pos/screens/user_and_security/user_services.dart';
+import 'package:pos/screens/user/user_services.dart';
 import 'dart:developer' as developer;
 
 import '../../models/user.dart';

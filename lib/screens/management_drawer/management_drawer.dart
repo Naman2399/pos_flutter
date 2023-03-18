@@ -6,8 +6,9 @@ import 'package:pos/screens/print_station/print_station.dart';
 import 'package:pos/screens/products/products.dart';
 import 'package:pos/screens/promotion_and_actions/promotion_and_action.dart';
 import 'package:pos/screens/report/report.dart';
+import 'package:pos/screens/security/security.dart';
 import 'package:pos/screens/stock/stock.dart';
-import 'package:pos/screens/user_and_security/user_and_security.dart';
+import 'package:pos/screens/user/user.dart';
 
 import '../documents/documents.dart';
 import '../tax_rates/tax_rates.dart';
@@ -47,9 +48,12 @@ class _ManagmentDrawerState extends State<ManagmentDrawer> {
     } else if (currentPage == DrawerSections.promotionAndAction) {
       container = PromotionAndActionPage();
       title = "Management / Promotions & Actions" ;
-    } else if (currentPage == DrawerSections.userAndSecurity) {
-      container = UserAndSecurityPage();
-      title = "Management / User & Security" ;
+    } else if (currentPage == DrawerSections.users) {
+      container = UserPage();
+      title = "Management / User" ;
+    } else if (currentPage == DrawerSections.security) {
+      container = SecurityPage();
+      title = "Management / Security" ;
     } else if (currentPage == DrawerSections.printStation) {
       container = PrintStationPage();
       title = "Management / Print station" ;
@@ -105,8 +109,8 @@ class _ManagmentDrawerState extends State<ManagmentDrawer> {
               currentPage == DrawerSections.customersAndSuppliers ? true : false),
           menuItem(7, "Promotion & Actions", Icons.call_to_action_outlined,
               currentPage == DrawerSections.promotionAndAction ? true : false),
-          menuItem(8, "User & Security", Icons.key_rounded,
-              currentPage == DrawerSections.userAndSecurity ? true : false),
+          menuItem(8, "User", Icons.person_outline_sharp,
+              currentPage == DrawerSections.users ? true : false),
           menuItem(9, "Print stations", Icons.print,
               currentPage == DrawerSections.printStation ? true : false),
           menuItem(10, "Payment types", Icons.payment_outlined,
@@ -115,6 +119,8 @@ class _ManagmentDrawerState extends State<ManagmentDrawer> {
               currentPage == DrawerSections.taxRates ? true : false),
           menuItem(12, "My Company", Icons.apartment,
               currentPage == DrawerSections.myCompany ? true : false),
+          menuItem(13, "Security", Icons.key_rounded,
+              currentPage == DrawerSections.security ? true : false),
           Divider(),
           Container(
             alignment: Alignment.centerRight,
@@ -151,7 +157,7 @@ class _ManagmentDrawerState extends State<ManagmentDrawer> {
             } else if (id == 7) {
               currentPage = DrawerSections.promotionAndAction;
             } else if (id == 8) {
-              currentPage = DrawerSections.userAndSecurity;
+              currentPage = DrawerSections.users;
             } else if (id == 9){
               currentPage = DrawerSections.printStation;
             } else if (id == 10){
@@ -160,6 +166,8 @@ class _ManagmentDrawerState extends State<ManagmentDrawer> {
               currentPage = DrawerSections.taxRates;
             } else if (id == 12){
               currentPage = DrawerSections.myCompany;
+            } else if (id == 13){
+              currentPage = DrawerSections.security;
             }
           });
         },
@@ -196,7 +204,8 @@ enum DrawerSections {
   reporting,
   customersAndSuppliers,
   promotionAndAction,
-  userAndSecurity,
+  users,
+  security,
   printStation,
   paymentTypes,
   taxRates,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pos/screens/user_and_security/add_user.dart';
+import 'package:pos/screens/user/add_user.dart';
 
 void addUserBottomSheet(BuildContext context) {
   showModalBottomSheet(

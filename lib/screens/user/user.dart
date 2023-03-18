@@ -2,22 +2,22 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:pos/database_models_functions/user_functions.dart';
 import 'package:pos/models/user.dart';
-import 'package:pos/screens/user_and_security/add_user_bottom_sheet.dart';
-import 'package:pos/screens/user_and_security/delete_user_dialog.dart';
-import 'package:pos/screens/user_and_security/edit_user_bottom_sheet.dart';
+import 'package:pos/screens/user/add_user_bottom_sheet.dart';
+import 'package:pos/screens/user/delete_user_dialog.dart';
+import 'package:pos/screens/user/edit_user_bottom_sheet.dart';
 
 import '../../widgets/snackbar.dart';
 import '../../widgets/text_decorations.dart';
 import 'dart:developer' as developer;
 
-class UserAndSecurityPage extends StatefulWidget {
-  const UserAndSecurityPage({Key? key}) : super(key: key);
+class UserPage extends StatefulWidget {
+  const UserPage({Key? key}) : super(key: key);
 
   @override
-  State<UserAndSecurityPage> createState() => _UserAndSecurityPageState();
+  State<UserPage> createState() => _UserPageState();
 }
 
-class _UserAndSecurityPageState extends State<UserAndSecurityPage> {
+class _UserPageState extends State<UserPage> {
   UserFunctions userFunctions = UserFunctions();
   bool showActiveUsers = true;
   UserSource userSource = UserSource(users: [], count: 0);
