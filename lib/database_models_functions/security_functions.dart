@@ -43,4 +43,23 @@ class SecurityFunctions {
       rethrow;
     }
   }
+
+  Future<void> updateDetails({required Security security}) async {
+    try {
+      Mysql database = Mysql();
+      MySqlConnection connection = await database.getConnection();
+      await connection.query(
+          '''UPDATE `pos`.`security`
+              SET
+              `access_level` = ? 
+              WHERE `key_field` = ?''',
+          [security.accessLevel, security.keyField]);
+      return ;
+    } on Exception catch (error, stackTrace) {
+      developer.log("Error in updating security details");
+      developer.log(error.toString());
+      developer.log(stackTrace.toString());
+      rethrow;
+    }
+  }
 }

@@ -5,8 +5,7 @@ import 'package:pos/screens/management_drawer/management_drawer.dart';
 void main() {
   runApp(const MyApp());
   // TODO : Need to remove below and uncomment above line
-  // SecurityFunctions securityFunctions = SecurityFunctions();
-  // securityFunctions.getSecurityDetails(section: 'general');
+
 }
 
 class MyApp extends StatelessWidget {
